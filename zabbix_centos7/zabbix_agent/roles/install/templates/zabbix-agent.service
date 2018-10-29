@@ -1,0 +1,11 @@
+[Unit]
+Description=Zabbix Monitor Agent
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/zabbix-agent/sbin/zabbix_agentd -f
+User=zabbix
+
+[Install]
+WantedBy=multi-user.target

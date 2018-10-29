@@ -1,0 +1,4 @@
+---
+- include: 01-sync-clock.yml
+- include: 02-allow-sudo.yml
+- include: 03-sync-conf_files.yml

@@ -1,0 +1,7 @@
+---
+- hosts: zabbix_agent
+  remote_user: # 远程主机执行任务时的用户。一般都是root，一般也不用指定。
+  gather_facts: True  # 搜集客户端信息
+  roles:
+    - common
+    - install

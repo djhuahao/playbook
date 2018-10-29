@@ -1,0 +1,3 @@
+zabbix_basedir: /opt/zabbix-agent
+zabbix_agentd_port: 10050
+zabbix_server_ip: 172.26.4.202

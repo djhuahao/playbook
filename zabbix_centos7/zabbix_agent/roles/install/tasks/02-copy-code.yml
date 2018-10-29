@@ -1,0 +1,30 @@
+---
+- name: Create src dir
+  file: path=/opt/source state=directory mode=0755
+
+- name: Create install dir
+  file: path={{ zabbix_dir }} state=directory mode=0755
+
+- name: Copy zabbix agentd code file to clients
+  copy: src=ansible-zabbix-{{ zabbix_version }}.tar.gz dest=/opt/source/ansible-zabbix-{{ zabbix_version }}.tar.gz
+        owner=root group=root
+
+- name: Uncompression ansible-zabbix-{{ zabbix_version }}.tar.gz
+  shell: tar xf /opt/source/ansible-zabbix-{{ zabbix_version }}.tar.gz -C {{ zabbix_dir }}
+
+- name: Copy zabbix start scripts
+  template: src=zabbix-agent.service dest=/usr/lib/systemd/system/zabbix-agent.service owner=root group=root mode=0755
+
+- name: Copy zabbix config file
+  template: src=zabbix_agentd.conf dest={{ zabbix_dir }}/etc/zabbix_agentd.conf owner={{ zabbix_user }} group={{ zabbix_user }}
+            mode=0644
+
+- name: Modify zabbix basedir permission
+  file: path={{ zabbix_dir }} owner={{ zabbix_user }} group={{ zabbix_user }} mode=0755 recurse=yes
+
+- name: Link zabbix-agent.service command
+  file: src={{ zabbix_dir }}/sbin/zabbix_agentd dest=/usr/local/sbin/zabbix_agentd state=link
+
+- name: Delete ansible-zabbix-{{ zabbix_version }}.tar.gz source file
+  shell: rm -f /opt/source/ansible-zabbix-{{ zabbix_version }}.tar.gz
+

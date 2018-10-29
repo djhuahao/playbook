@@ -1,0 +1,15 @@
+---
+- name: Create zabbix scripts directory
+  file: dest={{ zabbix_basedir }}/scripts state=directory owner=root group=root mode=0755 recurse=yes
+
+- name: Copy zabbix monitor scripts
+  copy: src=zabbix_scripts/ dest={{ zabbix_basedir }}/scripts owner=root group=root mode=0755
+
+- name: Copy zabbix_agentd.conf file
+  template: src=zabbix_agentd.conf dest={{ zabbix_basedir }}/etc/zabbix_agentd.conf owner=root group=root mode=0644
+  notify: restart zabbix_agentd
+
+- name: Copy Userparameter_script.conf file
+  template: src=Userparameter_script.conf dest={{ zabbix_basedir }}/etc/zabbix_agentd.conf.d/Userparameter_script.conf
+            owner=root group=root mode=0644
+  notify: restart zabbix_agentd

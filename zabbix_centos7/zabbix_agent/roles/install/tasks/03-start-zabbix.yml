@@ -1,0 +1,6 @@
+---
+- name: add permit tmp
+  file: path=/tmp owner=root mode=0777 recurse=yes
+- name: Start zabbix service
+  service: name=zabbix-agent.service state=started enabled=yes
+

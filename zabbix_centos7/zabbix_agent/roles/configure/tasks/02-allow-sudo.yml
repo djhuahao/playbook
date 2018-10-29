@@ -1,0 +1,13 @@
+---
+- name: Add allow zabbix user to nopasswd exec sudo
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^zabbix"
+    insertafter: "^root"
+    line: "zabbix ALL=(ALL)     NOPASSWD:ALL"
+
+- name: Add allow zabbix user to nopasswd exec sudo
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^Defaults:zabbix"
+    line: "Defaults:zabbix  !requiretty"

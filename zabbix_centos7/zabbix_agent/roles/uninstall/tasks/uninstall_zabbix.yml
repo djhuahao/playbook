@@ -1,0 +1,19 @@
+---
+- name: stop zabbix agentd service
+  service: name=zabbix-agent.service state=stopped
+#  shell: /etc/init.d/zabbix-agent.service stop
+
+- name: delete zabbix start scripts
+  file: path=/usr/lib/systemd/system/zabbix-agent.service state=absent
+
+- name: delete zabbix-agent.service command
+  file: path=/usr/local/sbin/zabbix_agentd state=absent
+
+- name: delete zabbix agentd basedir
+  file: path={{ zabbix_basedir }} state=absent
+
+- name: delete zabbix agentd logfile
+  file: path=/tmp/zabbix_agentd.log
+
+- name: delete zabbix user
+  user: name=zabbix state=absent remove=yes

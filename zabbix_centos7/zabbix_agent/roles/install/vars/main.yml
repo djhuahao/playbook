@@ -1,0 +1,6 @@
+zabbix_dir: /opt/zabbix-agent
+zabbix_version: 4.0.0
+zabbix_user: zabbix
+zabbix_server_port: 10051
+zabbix_agentd_port: 10050
+zabbix_server_ip: 172.26.4.202

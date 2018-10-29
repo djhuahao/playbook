@@ -1,0 +1,8 @@
+[zabbix_agent]
+172.26.4.203
+172.26.4.204
+172.26.4.205
+[zabbix_agent:vars]
+ansible_ssh_user=root
+ansible_ssh_pass=root1234
+ansible_ssh_port=22

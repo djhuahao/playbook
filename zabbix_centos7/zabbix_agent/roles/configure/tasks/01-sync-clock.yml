@@ -1,0 +1,16 @@
+---
+- name: Install ntpdate software
+  yum: name=ntpdate state=present
+
+- name: Synchronization clock cron job
+  cron:
+    name: Sync clock
+    job: /usr/sbin/ntpdate {{ ntpserver }} &> /dev/null && hwclock -w
+    minute: 30
+    hour: 7
+
+- name: Restart crond
+  service: name=crond state=restarted
+
+- name: Running ntpdate to synchronization time
+  shell: /usr/sbin/ntpdate {{ ntpserver }} && > /dev/null && hwclock -w

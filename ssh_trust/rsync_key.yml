@@ -1,0 +1,12 @@
+# 新增本地(ansible-server)公钥内容到远端客户端.ssh目录中authorized_keys文件，没有则创建authorized_keys文件
+# state: 1) present 添加，2) absent 删除
+---
+- hosts: zabbix_agent
+  gather_facts: false
+  remote_user: root
+
+  tasks:
+  - name: deliver authorized_keys
+    authorized_key:
+      user: root
+      key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"

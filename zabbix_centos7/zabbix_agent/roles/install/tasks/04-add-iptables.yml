@@ -1,0 +1,8 @@
+---
+- name: insert iptables rule for zabbix
+  lineinfile: dest=/etc/sysconfig/iptables create=yes state=present regexp="{{ zabbix_agentd_port }}"
+              insertafter="^:OUTPUT"
+              line="-A INPUT -p tcp --dport {{ zabbix_agentd_port }} -s {{ zabbix_server_ip }} -j ACCEPT"
+
+  notify: stop firewalld
+
