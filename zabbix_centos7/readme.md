@@ -1,4 +1,5 @@
 一、安装zabbix_agentd
+
 1、创建目录
 ```markdown
 1）在下面显示的目录结构中，包含了zabbix安装、卸载和配置三个角色(roles)，以及每一个roles的所有tasks列表、vars变量和zabbix配置文件。其中安装和卸载分别通过zabbix_install.yml、zabbix_delete.yml主任务程序的入口文件调用
